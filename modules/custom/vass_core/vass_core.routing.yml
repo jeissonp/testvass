@@ -13,3 +13,13 @@ vass.quiz_result:
     _title: 'Result Quiz'
   requirements:
     _role: 'vass'
+
+vass_core.config_form:
+  path: '/admin/config/vass_core/config'
+  defaults:
+    _form: '\Drupal\vass_core\Form\ConfigForm'
+    _title: 'Config'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

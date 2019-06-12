@@ -9,7 +9,8 @@ class PageGeneral extends ControllerBase {
 
     $build['#attached']['library'][] = 'cc_oktoberfest/ranking';
 
-    $query = \Drupal::database()->select('vass_core_quiz', 'q');
+    $query = \Drupal::database()->select('vass_core_quiz', 'q')
+      ->condition('q.uid', \Drupal::currentUser()->id());
 
     $query->join('node_field_data', 'n', 'n.nid = q.qid');
 

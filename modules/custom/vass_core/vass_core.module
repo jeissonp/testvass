@@ -1,1 +1,6 @@
 <?php
+function vass_core_user_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if($entity->isNew()) {
+    $entity->addRole('vass');
+  }
+}

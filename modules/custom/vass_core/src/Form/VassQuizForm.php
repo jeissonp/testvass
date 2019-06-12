@@ -67,6 +67,8 @@ class VassQuizForm extends FormBase {
         ))
         ->execute();
     }
+  
+    \Drupal::messenger()->addMessage(\Drupal::config('vass_core.config')->get('message_success'));
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
