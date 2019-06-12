@@ -1,0 +1,15 @@
+vass.quiz:
+  path: '/user/quiz'
+  defaults:
+    _form: '\Drupal\vass_core\Form\VassQuizForm'
+    _title: 'Quiz'
+  requirements:
+    _role: 'vass'
+
+vass.quiz_result:
+  path: '/user/quiz/result'
+  defaults:
+    _controller: '\Drupal\vass_core\Controller\PageGeneral::result'
+    _title: 'Result Quiz'
+  requirements:
+    _role: 'vass'

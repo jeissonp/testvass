@@ -1,0 +1,4 @@
+name: 'Vass Quiz'
+description: 'Quiz.'
+core: 8.x
+type: module

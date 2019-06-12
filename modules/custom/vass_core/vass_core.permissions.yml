@@ -1,0 +1,37 @@
+upload kpi:
+  title: Upload KPI
+
+result activity:
+  title: Result Activity
+
+detail activity:
+  title: Detail Activity
+
+response activity:
+  title: Response Activity
+
+notify manager:
+  title: Notify Manager
+
+range manager:
+  title: Range Manager
+
+range query:
+  title: Range Query
+
+upload user:
+  title: Upload User
+
+activity manager:
+  title: Activity Manager
+
+activity list:
+  title: Activity List
+
+list customer service:
+  title: List Customer Service
+list kpis:
+  title: List KPIS
+
+list activities:
+  title: List Activities

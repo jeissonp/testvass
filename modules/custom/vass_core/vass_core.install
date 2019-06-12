@@ -1,0 +1,30 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function vass_core_schema() {
+  $schema['vass_core_quiz'] = array(
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'type' => 'int',
+      ),
+      'qid' => array(
+        'type' => 'int',
+      ),
+      'created' => array(
+        'type' => 'int',
+      ),
+      'response' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
+}
