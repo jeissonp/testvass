@@ -178,13 +178,17 @@ class QuizResource extends ResourceBase {
   function validate_data($questions) {
     foreach ($questions as $nid => $response) {
       if ($node = Node::load($nid)) {
+        $valid = false;
         foreach ($node->get('field_answer')->getValue() as $key => $value) {
           if ($response == $value['value']) {
-            continue;
+            $valid = true;
+            break;
           }
         }
         
-        throw new \Exception('Response "' . $response . '"" is not valid');
+        if (!$valid) {
+          throw new \Exception('Response "' . $response . '"" is not valid');
+        }
       }
       else {
         throw new \Exception('Question "' . $nid . '"" is not valid');
