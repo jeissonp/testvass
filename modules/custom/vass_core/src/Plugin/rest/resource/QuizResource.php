@@ -137,7 +137,7 @@ class QuizResource extends ResourceBase {
     $code = 200;
     try {
       $data = json_decode($request->getContent(), true);
-      if (isset($data['questions']) && is_array($data['questions'])) {
+      if (isset($data['questions']) && is_array($data['questions']) && count($data['questions']) > 0) {
         if ($this->validate_data($data['questions'])) {
           foreach ($data['questions'] as $key => $value) {
             \Drupal::database()->insert('vass_core_quiz')
@@ -176,15 +176,15 @@ class QuizResource extends ResourceBase {
   }
   
   function validate_data($questions) {
-    foreach ($questions as $nid => $value) {
+    foreach ($questions as $nid => $response) {
       if ($node = Node::load($nid)) {
         foreach ($node->get('field_answer')->getValue() as $key => $value) {
-          if ($value == $value['value']) {
+          if ($response == $value['value']) {
             continue;
           }
         }
         
-        throw new \Exception('Response "' . $value . '"" is not valid');
+        throw new \Exception('Response "' . $response . '"" is not valid');
       }
       else {
         throw new \Exception('Question "' . $nid . '"" is not valid');
