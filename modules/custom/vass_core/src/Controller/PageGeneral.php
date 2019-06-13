@@ -28,9 +28,9 @@ class PageGeneral extends ControllerBase {
     
     foreach ($result as $item) {
       $rows[] = array(
-        $date_formatter->format($item->created),
-        $item->title,
-        $item->response,
+        'date' => $date_formatter->format($item->created),
+        'question' => $item->title,
+        'response' => $item->response,
       );
     }
     
