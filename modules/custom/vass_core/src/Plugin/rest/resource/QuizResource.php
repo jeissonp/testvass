@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\user\UserStorageInterface;
 use Drupal\Core\Cache\CacheableMetadata;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Quiz Resource
@@ -130,5 +131,66 @@ class QuizResource extends ResourceBase {
     $response->addCacheableDependency($disable_cache);
     
     return $response;
+  }
+  
+  public function post(Request $request) {
+    $code = 200;
+    try {
+      $data = json_decode($request->getContent(), true);
+      if (isset($data['questions']) && is_array($data['questions'])) {
+        if ($this->validate_data($data['questions'])) {
+          foreach ($data['questions'] as $key => $value) {
+            \Drupal::database()->insert('vass_core_quiz')
+              ->fields(array(
+                'created' => time(),
+                'uid' => \Drupal::currentUser()->id(),
+                'qid' => $key,
+                'response' => $value,
+              ))
+              ->execute();
+          }
+          
+          $response = [
+            'message' => \Drupal::config('vass_core.config')->get('message_success'),
+          ];
+        }
+      }
+      else {
+        throw new \Exception('Question is required');
+      }
+    }
+    catch (\Exception $e) {
+      $code = 400;
+      $response = [
+        'message' => $e->getMessage(),
+      ];
+    }
+  
+    $response = new ResourceResponse($response, $code);
+    $disable_cache = new CacheableMetadata();
+    $disable_cache->setCacheMaxAge(0);
+  
+    $response->addCacheableDependency($disable_cache);
+  
+    return $response;
+  }
+  
+  function validate_data($questions) {
+    foreach ($questions as $nid => $value) {
+      if ($node = Node::load($nid)) {
+        foreach ($node->get('field_answer')->getValue() as $key => $value) {
+          if ($value == $value['value']) {
+            continue;
+          }
+        }
+        
+        throw new \Exception('Response "' . $value . '"" is not valid');
+      }
+      else {
+        throw new \Exception('Question "' . $nid . '"" is not valid');
+      }
+    }
+    
+    return true;
   }
 }
