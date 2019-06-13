@@ -1,18 +1,15 @@
 <?php
 
-namespace Drupal\ab_api\Plugin\rest\resource;
+namespace Drupal\vass_core\Plugin\rest\resource;
 
 
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\Core\Url;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Psr\Log\LoggerInterface;
 use Drupal\user\UserStorageInterface;
 use Drupal\Core\Cache\CacheableMetadata;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Quiz Result Resource
