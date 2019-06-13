@@ -143,7 +143,7 @@ class QuizResource extends ResourceBase {
             \Drupal::database()->insert('vass_core_quiz')
               ->fields(array(
                 'created' => time(),
-                'uid' => \Drupal::currentUser()->id(),
+                'uid' => $this->currentUser->id(),
                 'qid' => $key,
                 'response' => $value,
               ))
