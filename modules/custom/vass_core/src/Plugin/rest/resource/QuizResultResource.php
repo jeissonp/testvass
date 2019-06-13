@@ -109,9 +109,9 @@ class QuizResultResource extends ResourceBase {
   
       foreach ($result as $item) {
         $rows[] = array(
-          $date_formatter->format($item->created),
-          $item->title,
-          $item->response,
+          'date' => $date_formatter->format($item->created),
+          'title' => $item->title,
+          'response' => $item->response,
         );
       }
       
